@@ -3,7 +3,7 @@ const { getDatabase } = require("../../config/mongodb")
 const db = getDatabase()
 const createUser = async (newUser) => {
     try {
-        await db.collection("student").insertOne(newUser)
+        await db.collection("users").insertOne(newUser)
     } catch (err) {
         console.log("error")
     }
@@ -11,7 +11,7 @@ const createUser = async (newUser) => {
 
 const checkUserEmail = async (email) => {
     try {
-        const result = await db.collection('student').findOne({ email })
+        const result = await db.collection('users').findOne({ email })
         return result
     } catch (err) {
         console.log(`error in checkuser ${err}`)

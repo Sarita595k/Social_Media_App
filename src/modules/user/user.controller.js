@@ -8,12 +8,12 @@ const signupUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = { name, email, password: hashedPassword }
         await createUser(newUser)
-        res.json({
+        res.status(200).json({
             status: "Success",
             message: "Sign up successfully"
         })
     } catch (err) {
-        res.json({
+        res.status(401).json({
             status: "Failed",
             message: "Sign up failed"
         })
@@ -37,15 +37,15 @@ const loginUser = async (req, res) => {
                 message: "invalid password"
             })
         }
-        const payload = { id: user.id }
-        const token = jwt.sign(payload, process.env.SECRET_KEY_FOR_JWT, { expiresIn: "15m" })
-        res.json({
+
+        const token = jwt.sign({ _id: user._id, email: user.email }, process.env.SECRET_KEY_FOR_JWT, { expiresIn: "15m" })
+        res.status(200).json({
             status: "Success",
             message: "Login successfully",
             token: token
         })
     } catch (err) {
-        res.json({
+        res.status(401).json({
             status: "failed",
             message: "error in login"
         })

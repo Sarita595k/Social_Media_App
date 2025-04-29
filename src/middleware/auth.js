@@ -2,18 +2,21 @@ const jwt = require('jsonwebtoken')
 // const express = require('express')
 require('dotenv').config()
 
-const auth = (req, res, next) => {
-    const authIs = req.headers['authorization']
-    const token = authIs && authIs.split(" ")[1]
+const isLoggedIn = (req, res, next) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(" ")[1]
     if (!token) {
-        return res.send("no token provided")
+        return res.status(401).send("not logged in")
     }
-    jwt.verify(token, process.env.SECRET_KEY_FOR_JWT, (err, user) => {
-        if (err) {
-            return res.send("invalid token")
-        }
-        req.user = user
+    try {
+        const decode = jwt.verify(token, process.env.SECRET_KEY_FOR_JWT)
+        req.user = decode
         next()
-    })
+    } catch (err) {
+        res.status(401).json({
+            status: "failed",
+            message: "Error in auth file"
+        })
+    }
 }
-module.exports = auth
+module.exports = { isLoggedIn }

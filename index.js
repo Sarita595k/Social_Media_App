@@ -2,10 +2,11 @@ const express = require("express")
 const app = express()
 const { connectToDb } = require('./src/config/mongodb')
 const userRoutes = require('./src/modules/user/user.route')
+const postRoutes = require('./src/modules/post/post.route')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use('/api/users', userRoutes)
-
+app.use('/api/posts', postRoutes)
 
 app.get("/", (req, res) => {
     res.send("hii server")
