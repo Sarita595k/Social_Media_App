@@ -3,14 +3,17 @@ const app = express()
 const { connectToDb } = require('./src/config/mongodb')
 const userRoutes = require('./src/modules/user/user.route')
 const postRoutes = require('./src/modules/post/post.route')
+const commentsRoutes = require('./src/modules/comment/comment.routes')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use('/api/users', userRoutes)
 app.use('/api/posts', postRoutes)
+app.use('/api/comments', commentsRoutes)
 
 app.get("/", (req, res) => {
     res.send("hii server")
 })
+
 // app.get("/test", async (req, res) => {
 //     try {
 //         const db = await connectToDb()
