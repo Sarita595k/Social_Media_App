@@ -13,7 +13,6 @@ const getAllPostsCtrl = async (req, res) => {
 }
 
 const createPostCtrl = async (req, res) => {
-    console.log(req.user)
     try {
         const { imageUrl, caption } = req.body
 

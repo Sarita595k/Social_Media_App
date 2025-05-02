@@ -46,6 +46,13 @@ const updateComment = async (req, res) => {
     try {
         const id = req.params.id
         const { comment } = req.body
+        const idExist = await checkIdExist(id)
+        if (!idExist) {
+            return res.status(500).json({
+                status: "Failed",
+                message: "No post found with this id"
+            })
+        }
         const result = await updateCommentRepo(id, comment)
         return res.status(201).json({
             status: "Success",
