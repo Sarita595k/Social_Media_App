@@ -4,6 +4,7 @@ const { getComment, addComment, updateComment, deleteComment } = require('./comm
 const router = express.Router()
 const { isLoggedIn } = require('../../middleware/auth')
 
+// added moddleware for authentication
 router.use(isLoggedIn)
 router.get('/', getComment)
 router.post('/comment/:id', addComment)
