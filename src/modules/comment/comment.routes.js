@@ -10,4 +10,6 @@ router.get('/', getComment)
 router.post('/comment/:id', addComment)
 router.patch('/comment/:id', updateComment)
 router.delete('/comment/:id', deleteComment)
+
+// exporting the router 
 module.exports = router

@@ -1,5 +1,6 @@
 const { getAllPost, getPostById, createPost, updatePost, deletePost } = require('./post.repository')
 
+// to get all the posts 
 const getAllPostsCtrl = async (req, res) => {
     try {
         const data = await getAllPost()
@@ -12,6 +13,7 @@ const getAllPostsCtrl = async (req, res) => {
     }
 }
 
+// to create a new post 
 const createPostCtrl = async (req, res) => {
     try {
         const { imageUrl, caption } = req.body
