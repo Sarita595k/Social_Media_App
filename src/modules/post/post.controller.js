@@ -33,6 +33,7 @@ const createPostCtrl = async (req, res) => {
     }
 }
 
+// update a post 
 const updatePostCtrl = async (req, res) => {
     try {
         const postId = req.params.id
